@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import HomeScreenComponent from "./components/HomeScreenComponent"
-import AddScreenComponent from "./components/AddScreenComponent"
+import HomeScreen from "./screens/HomeScreen"
+import AddReminderScreen from "./screens/AddReminderScreen"
 
 export const ReminderApp = StackNavigator({
 	Home: {
-		screen: HomeScreenComponent
+		screen: HomeScreen
 	},
 	Add: {
-		screen: AddScreenComponent
+		screen: AddReminderScreen
 	}
 });
 
