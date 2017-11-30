@@ -8,7 +8,7 @@ export default class MyFirstComponent extends Component {
 	render(){
 		return(
 			<View>
-				<Button buttonStyle={styles.button} fontWeight='bold' backgroundColor='#3D6DCC' title='CANCEL' />
+				<Button buttonStyle={styles.button} fontWeight='bold' backgroundColor='#3D6DCC' title='SAVE' />
 			</View>
 		);
 	}
@@ -16,6 +16,6 @@ export default class MyFirstComponent extends Component {
 const styles = StyleSheet.create({
     button: {
     	margin: 0,
-    	padding:0,
+    	padding:0
     }
 });

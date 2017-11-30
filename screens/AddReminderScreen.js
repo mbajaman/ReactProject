@@ -5,6 +5,7 @@ import { Icon } from 'react-native-vector-icons';
 
 import NoteComponent from '../components/NoteComponent'
 import CancelButtonComponent from '../components/CancelButtonComponent'
+import SaveButtonComponent from '../components/SaveButtonComponent'
 
 export default class AddScreenComponent extends Component {
 
@@ -20,7 +21,7 @@ export default class AddScreenComponent extends Component {
                       statusBarProps={{ barStyle: 'light-content' }}
                       leftComponent={<CancelButtonComponent />}
                       centerComponent={{ text: 'NEW REMINDER', style: { color: '#fff' } }}
-                      rightComponent={{ text: 'SAVE', style: { color: '#fff' } }}
+                      rightComponent={<SaveButtonComponent />}
                       outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
                     />
                 </View>
