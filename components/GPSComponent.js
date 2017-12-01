@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import MapView from 'react-native-maps';
 
 export default class GPSComponent extends Component {
@@ -8,34 +8,40 @@ export default class GPSComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			LatLng: {
-				latitude: null,
-				longitude: null
-			},
-		};
+	      region: {
+			  latitude: 49,
+			  latitudeDelta: 0,
+			  longitude: -123,
+			  longitudeDelta: 0,
+		  },
+    	};
 	}
 	
 	componentDidMount () {
 		navigator.geolocation.getCurrentPosition((position) => {
-			console.log('Before setting the state :' + this.state.LatLng);
-			console.log('Current latitude: ' + position.coords.latitude);
-			console.log('Current longitude: ' + position.coords.longitude);
-			console.log('After setting the state :' + this.state.LatLng);
+			console.log('Before setting the state: ' + this.state.region.latitude + ', ' + this.state.region.longitude);
+			console.log('Current location: ' + position.coords.latitude + ', ' + position.coords.longitude);
+			this.setState({
+				region: {
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude,
+					latitudeDelta: position.coords.accuracy/1500,
+			  		longitudeDelta: position.coords.accuracy/1500
+				},
+			});
+			console.log('After setting the state: ' + this.state.region.latitude + ', ' + this.state.region.longitude);
 		});
 	}
 	
     render() {
         return (
 			<MapView
-				LatLng={this.state.LatLng}
-				style={styles.map}
+			region={this.state.region}
+        	style={{height: 200, marginTop: 10}}
 			>
 
 			<MapView.Marker
-            coordinate={{
-            	latitude: 49.260633,
-            	longitude: -123.246005
-            }}
+            coordinate={this.state.region}
             title={"Current Location"}
             pinColor={'blue'}
          	/>
@@ -44,9 +50,3 @@ export default class GPSComponent extends Component {
     	)
 	}
 }
-
-const styles = StyleSheet.create({
-	map: {
-		...StyleSheet.absoluteFillObject,
-	},
-});
