@@ -21,13 +21,13 @@ export default class AddScreenComponent extends Component {
                     <Header
                       statusBarProps={{ barStyle: 'light-content' }}
                       leftComponent={<CancelButtonComponent />}
-                      centerComponent={{ text: 'NEW REMINDER', style: { color: '#fff' } }}
+                      centerComponent={{ text: 'NEW REMINDER', style: { fontSize: 15, color: '#fff' } }}
                       rightComponent={<SaveButtonComponent />}
                       outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
                     />
                 </View>
-                <NoteComponent />
                 <GPSComponent />
+                <NoteComponent />
             </View>
         );
     }

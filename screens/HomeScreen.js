@@ -18,13 +18,14 @@ export default class HomeScreenComponent extends Component {
     
     render() {
         const {navigate} = this.props.navigation;
+        
         return (
             <View>
                 <View style={styles.header}>
                     <Header
                       statusBarProps={{ barStyle: 'light-content' }}
                       leftComponent={{ icon: 'menu', color: '#fff' }}
-                      centerComponent={{ text: 'MY REMINDERS', style: { color: '#fff' } }}
+                      centerComponent={{ text: 'MY REMINDERS', style: { fontSize: 15, color: '#fff' } }}
                       rightComponent={{ icon: 'home', color: '#fff' }}
                       outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
                     />

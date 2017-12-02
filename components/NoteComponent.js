@@ -23,16 +23,16 @@ export default class MyFirstComponent extends Component {
 		return(
 			<View style={styles.conatiner}>
 				<TextInput 
-					style={{height: 40, width: 200, padding: 10}}
+					style={{height: 40, width: 200, padding: 10, fontSize: 20}}
 		       		onChangeText={(title) => this.setState({title})}
 		       		autoFocus= {true}
 		        	value={this.state.title}
 		        	placeholder = {"Title"}
 		        	returnKeyType = {"next"}
 	        	/>
-	        	<Text> Date: {this.state.curDate} </Text>
+	        	<Text style={{fontSize: 15}}> Date: {this.state.curDate} </Text>
 	        	<TextInput 
-					style={{width: 350, padding: 10}}
+					style={{width: 350, padding: 10, marginTop: 10}}
 					multiline={true}
 					autoGrow={true}
 	        		maxHeight={300}
