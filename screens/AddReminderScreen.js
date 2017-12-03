@@ -5,6 +5,8 @@ import { Icon } from 'react-native-vector-icons';
 
 import NoteComponent from '../components/NoteComponent'
 import GPSComponent from '../components/GPSComponent'
+import ImportButtonComponent from '../components/ImportButtonComponent'
+import TakePictureComponent from '../components/TakePictureComponent'
 
 export default class AddScreenComponent extends Component {
 
@@ -42,6 +44,11 @@ export default class AddScreenComponent extends Component {
                     />
                 </View>
                 <NoteComponent />
+
+                <View style={styles.bottomButtons}>
+                  <ImportButtonComponent />
+                  <TakePictureComponent />
+                </View>
             </View>
         );
     }
@@ -49,22 +56,28 @@ export default class AddScreenComponent extends Component {
 
 const styles = StyleSheet.create({
     header: {
-        width: '100%',
+      width: '100%',
     },
-
     placeholder: {
-        height: 280,
-        width: 170,
-        resizeMode: 'contain',
+      height: 280,
+      width: 170,
+      resizeMode: 'contain',
     },
-
-  notesContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    backgroundColor: '#fff',
-    padding: 10,
-  },
-  button: {
+    notesContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      backgroundColor: '#fff',
+      padding: 10,
+    },
+    button: {
+      margin: 0,
+      padding:0
+    },
+    bottomButtons: {
+      position: 'absolute',
+      width: '100%',
+      left: 0,
+      bottom: 0,
       margin: 0,
       padding:0
     }
