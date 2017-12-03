@@ -5,8 +5,7 @@ import { Icon } from 'react-native-vector-icons';
 
 import NoteComponent from '../components/NoteComponent'
 import GPSComponent from '../components/GPSComponent'
-import ImportButtonComponent from '../components/ImportButtonComponent'
-import TakePictureComponent from '../components/TakePictureComponent'
+import CameraComponent from '../components/CameraComponent'
 
 export default class AddScreenComponent extends Component {
 
@@ -18,7 +17,7 @@ export default class AddScreenComponent extends Component {
         const {navigate} = this.props.navigation;
         return (
 
-            <View style={styles.theScreen}>
+            <View>
                 <View style={styles.header}>
                     <Header
                       statusBarProps={{ barStyle: 'light-content' }}
@@ -44,14 +43,8 @@ export default class AddScreenComponent extends Component {
                     />
                 </View>
                 <NoteComponent />
-
-                <View style={styles.bottomButtons}>
-                  <View style={styles.buttonContainer}>
-                    <ImportButtonComponent />
-                  </View>
-                  <View style={styles.buttonContainer}>
-                    <TakePictureComponent />
-                  </View>
+                <View style= {styles.bottomView}>
+                  <CameraComponent />
                 </View>
             </View>
         );
@@ -59,9 +52,6 @@ export default class AddScreenComponent extends Component {
 }
 
 const styles = StyleSheet.create({
-    theScreen: {
-      height: '100%'
-    },    
     header: {
       width: '100%',
     },
@@ -80,15 +70,7 @@ const styles = StyleSheet.create({
       margin: 0,
       padding:0
     },
-    bottomButtons: {
-      position: 'absolute',
-      bottom: 0,
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
+    bottomView: {
+      height: '30%',
     },
-    buttonContainer: {
-      flex: 1,
-    }
 });

@@ -33,14 +33,16 @@ export default class MyFirstComponent extends Component {
 	        	/>
 	        	<Text style={{fontSize: 20, marginBottom: 10}}> Date: {this.state.curDate} </Text>
 	        	<GPSComponent />
-	        	<TextInput 
-					style={{width: 350, padding: 10, marginTop: 10}}
-					multiline={true}
-					autoGrow={true}
-	        		maxHeight={300}
-		       		onChangeText={(text) => this.setState({text})}
-		        	placeholder = {"Reminder Notes"}
-		        	/>
+	        	<View style={styles.textContainer}>
+		        	<TextInput 
+						style={{width: 350, padding: 10, marginTop: 10}}
+						multiline={true}
+						autoGrow={true}
+		        		maxHeight={100}
+			       		onChangeText={(text) => this.setState({text})}
+			        	placeholder = {"Reminder Notes"}
+			        	/>
+		        </View>
         	</View>
 
 		);
@@ -50,4 +52,7 @@ const styles = StyleSheet.create({
 	container: {
     padding: 20,
   },
+  textContainer :{
+  	height: 100,
+  }
 });
