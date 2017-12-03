@@ -30,7 +30,7 @@ export default class MyFirstComponent extends Component {
 		        	placeholder = {"Title"}
 		        	returnKeyType = {"next"}
 	        	/>
-	        	<Text style={{fontSize: 15}}> Date: {this.state.curDate} </Text>
+	        	<Text style={{fontSize: 20}}> Date: {this.state.curDate} </Text>
 	        	<TextInput 
 					style={{width: 350, padding: 10, marginTop: 10}}
 					multiline={true}

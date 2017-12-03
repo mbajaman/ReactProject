@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 
-export default class SaveButtonComponent extends Component {
+export default class ImportButtonComponent extends Component {
 
 	render(){
 		return(
 			<View>
 				<Button 
 					buttonStyle={styles.button}
-					fontWeight='bold'
-					backgroundColor='#3D6DCC'
-					title='SAVE' 
+					fontWeight='bold' 
+					backgroundColor='#3D6DCC' 
+					title='IMPORT' 
 				/>
 			</View>
 		);
@@ -20,7 +20,8 @@ export default class SaveButtonComponent extends Component {
 }
 const styles = StyleSheet.create({
     button: {
-    	margin: 0,
-    	padding:0
-    }
+		position: "absolute", 
+		bottom: 0, 
+		left: 0    
+	}
 });

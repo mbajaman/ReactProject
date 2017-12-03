@@ -7,6 +7,7 @@ import NoteComponent from '../components/NoteComponent'
 import CancelButtonComponent from '../components/CancelButtonComponent'
 import SaveButtonComponent from '../components/SaveButtonComponent'
 import GPSComponent from '../components/GPSComponent'
+import ImportButtonComponent from '../components/ImportButtonComponent'
 
 export default class AddScreenComponent extends Component {
 
@@ -28,6 +29,7 @@ export default class AddScreenComponent extends Component {
                 </View>
                 <GPSComponent />
                 <NoteComponent />
+                <ImportButtonComponent />
             </View>
         );
     }

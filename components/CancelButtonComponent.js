@@ -9,11 +9,11 @@ export default class CancelButtonComponent extends Component {
 		return(
 			<View>
 				<Button 
-				buttonStyle={styles.button} 
-				fontWeight='bold' 
-				backgroundColor='#3D6DCC' 
-				title='CANCEL' 
-			/>
+					buttonStyle={styles.button} 
+					fontWeight='bold' 
+					backgroundColor='#3D6DCC' 
+					title='CANCEL' 
+				/>
 			</View>
 		);
 	}
