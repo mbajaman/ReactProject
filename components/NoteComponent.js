@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Text, View, TextInput, StyleSheet} from 'react-native';
+import GPSComponent from '../components/GPSComponent'
 
 export default class MyFirstComponent extends Component {
 
@@ -31,6 +32,7 @@ export default class MyFirstComponent extends Component {
 		        	returnKeyType = {"next"}
 	        	/>
 	        	<Text style={{fontSize: 15}}> Date: {this.state.curDate} </Text>
+	        	<GPSComponent />
 	        	<TextInput 
 					style={{width: 350, padding: 10, marginTop: 10}}
 					multiline={true}
