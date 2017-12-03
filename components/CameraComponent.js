@@ -8,8 +8,9 @@ import {Text,
 	Image,
 	ScrollView } from 'react-native';
 import { ImagePicker } from 'expo';
+import { SocialIcon } from 'react-native-elements';
 
-export default class SelectPictureComponent extends Component {
+export default class CameraComponent extends Component {
 
 	constructor(props) {
 		super(props);
@@ -54,19 +55,10 @@ export default class SelectPictureComponent extends Component {
 		const width = Dimensions.get('window'); //Dynamic scaling for various devices.
 
 		return(
-			<View>
 			<View style={styles.container}>
+				<View>
 					<ScrollView
 						contentContainerStyle = {styles.scrollView} >
-						<TouchableOpacity onPress={ this.fbFetchPhoto.bind(this) } >
-						{this.state.fbImage ? (
-							<Image 
-							style={styles.image}
-							source={this.state.fbImage}
-	                         />
-							) : null }
-							
-                         </TouchableOpacity> 
 
 						{this.state.photos.map(function(p, index) {
 							return(
@@ -83,30 +75,49 @@ export default class SelectPictureComponent extends Component {
 					</ScrollView>
 				</View>
 				<View style={styles.bottomContainer}>
-					<Text> Wee </Text>
+					<View style={styles.buttons}>
+						<SocialIcon 
+		  					button type='instagram'					
+		  					title='IMPORT' 
+		  					onPress={ this._pickImage }
+						/>
+					</View>
+					<View style={styles.buttons}>
+						<SocialIcon 
+		  					button type='instagram'					
+		  					title='TAKE NEW'
+		  					onPress = { this._takePhoto }
+						/>
+					</View>
 				</View>
 			</View>
 		);
 	}
 }
 const styles = StyleSheet.create({
-  container: {
-	height: '100%',
-	width: '100%',
-    backgroundColor: '#000',
-  },
-  bottomContainer: {
-  	height:50,
-  	backgroundColor: "#663399",
-  },
-  image: {
-  	height: (Dimensions.get('window').height/3) - 12,
-  	width: (Dimensions.get('window').width/2) - 2,
-  	margin: 1,
-  },
-  scrollView: {
-  	flexWrap: 'wrap',
-  	flexDirection: 'row',
-  },
+	container: {
+		height: '100%',
+		padding: 5,
+	},
+	bottomContainer: {
+		position: 'absolute',
+		bottom: 0,
+		flex: 1,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	buttons: {
+		flex: 1,
+	},	
+	image: {
+		height: (Dimensions.get('window').height/4) - 12,
+		width: (Dimensions.get('window').width/2) - 2,
+		margin: 1,
+	},
+	scrollView: {
+		flexWrap: 'wrap',
+		flexDirection: 'row',
+	},
 });
 

@@ -20,7 +20,7 @@ export default class HomeScreenComponent extends Component {
         const {navigate} = this.props.navigation;
         
         return (
-            <View>
+            <View style={styles.container}>
                 <View style={styles.header}>
                     <Header
                       statusBarProps={{ barStyle: 'light-content' }}
@@ -41,6 +41,10 @@ export default class HomeScreenComponent extends Component {
 }
 
 const styles = StyleSheet.create({
+	container: {
+		height: '100%',
+		backgroundColor: 'white',
+	},
     header: {
         width: '100%',
     },
