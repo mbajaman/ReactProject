@@ -1,2 +1,7 @@
 # ReactProject
-npm install react-native-elements react-navigation --save
+
+Libraries:
+react-native-elements
+react-navigation
+react-native-maps
+react-native-permission

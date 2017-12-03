@@ -9,9 +9,9 @@ export default class GPSComponent extends Component {
 		super(props);
 		this.state = {
 	      region: {
-			  latitude: 49,
+			  latitude: 49.2817719,
 			  latitudeDelta: 0,
-			  longitude: -123,
+			  longitude: -123.1173224,
 			  longitudeDelta: 0,
 		  },
     	};
