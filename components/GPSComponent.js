@@ -15,6 +15,14 @@ export default class GPSComponent extends Component {
 			  longitudeDelta: 0,
 		  },
     	};
+		this.onRegionChange = this.onRegionChange.bind(this);
+	}
+
+	onRegionChange(region) {
+		console.log(region);
+		this.setState({
+			region
+		});
 	}
 	
 	componentDidMount () {
@@ -36,15 +44,11 @@ export default class GPSComponent extends Component {
     render() {
         return (
 			<MapView
-			region={this.state.region}
-        	style={{height: 200}}
+				region={this.state.region}
+				onRegionChange={this.onRegionChange}
+	        	style={{height: 200}}
+				showsUserLocation = {true}
 			>
-
-			<MapView.Marker
-            coordinate={this.state.region}
-            title={"Current Location"}
-            pinColor={'blue'}
-         	/>
          	
 			</MapView>
     	)

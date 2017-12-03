@@ -8,7 +8,8 @@ export default class TakePictureComponent extends Component {
 		return(
 			<View>
 				<SocialIcon 
-  					button type='instagram'					
+  					button 
+  					type='instagram'					
   					title='TAKE NEW' 
 				/>
 			</View>

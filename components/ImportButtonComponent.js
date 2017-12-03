@@ -8,7 +8,8 @@ export default class ImportButtonComponent extends Component {
 		return(
 			<View>
 				<SocialIcon 
-  					button type='instagram'					
+  					button 
+  					type='instagram'					
   					title='IMPORT' 
 				/>
 			</View>
