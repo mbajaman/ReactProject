@@ -37,7 +37,7 @@ export default class GPSComponent extends Component {
         return (
 			<MapView
 			region={this.state.region}
-        	style={{height: 200, marginTop: 10}}
+        	style={{height: 200}}
 			>
 
 			<MapView.Marker

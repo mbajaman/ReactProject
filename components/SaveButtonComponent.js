@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Text, View, StyleSheet} from 'react-native';
 import { Button } from 'react-native-elements';
 
-export default class MyFirstComponent extends Component {
+export default class SaveButtonComponent extends Component {
 
 	render(){
 		return(
