@@ -1,12 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Text, 
-	View, 
-	StyleSheet,
-	TouchableOpacity,
-	Dimensions,
-	Image,
-	ScrollView } from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Dimensions, Image, ScrollView } from 'react-native';
 import { ImagePicker } from 'expo';
 import { SocialIcon } from 'react-native-elements';
 
@@ -108,7 +102,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	buttons: {
-		flex: 1,
+		flex: 1
 	},	
 	image: {
 		height: (Dimensions.get('window').height/4) - 12,
@@ -120,4 +114,3 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 	},
 });
-
