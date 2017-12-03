@@ -9,9 +9,9 @@ export default class ImportButtonComponent extends Component {
 		return(
 			<View>
 				<Button 
-					buttonStyle={styles.button}
+					buttonStyle={styles.button} 
 					fontWeight='bold' 
-					backgroundColor='#3D6DCC' 
+					backgroundColor='green' 
 					title='IMPORT' 
 				/>
 			</View>
@@ -20,8 +20,7 @@ export default class ImportButtonComponent extends Component {
 }
 const styles = StyleSheet.create({
     button: {
-		position: "absolute", 
-		bottom: 0, 
-		left: 0    
-	}
+    	width: '50%',
+    	borderRadius:30
+    }
 });

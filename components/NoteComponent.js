@@ -31,7 +31,7 @@ export default class MyFirstComponent extends Component {
 		        	placeholder = {"Title"}
 		        	returnKeyType = {"next"}
 	        	/>
-	        	<Text style={{fontSize: 20}}> Date: {this.state.curDate} </Text>
+	        	<Text style={{fontSize: 20, marginBottom: 10}}> Date: {this.state.curDate} </Text>
 	        	<GPSComponent />
 	        	<TextInput 
 					style={{width: 350, padding: 10, marginTop: 10}}
