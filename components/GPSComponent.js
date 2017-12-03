@@ -33,8 +33,8 @@ export default class GPSComponent extends Component {
 				region: {
 					latitude: position.coords.latitude,
 					longitude: position.coords.longitude,
-					latitudeDelta: position.coords.accuracy/1500,
-			  		longitudeDelta: position.coords.accuracy/1500
+					latitudeDelta: position.coords.accuracy/5000,
+			  		longitudeDelta: position.coords.accuracy/5000
 				},
 			});
 			console.log('After setting the state: ' + this.state.region.latitude + ', ' + this.state.region.longitude);
@@ -47,7 +47,10 @@ export default class GPSComponent extends Component {
 				region={this.state.region}
 				onRegionChange={this.onRegionChange}
 	        	style={{height: 200}}
-				showsUserLocation = {true}
+				showsUserLocation={true}
+				provider={'google'}
+				showsMyLocationButton={true}
+				loadingEnabled={true}
 			>
          	
 			</MapView>

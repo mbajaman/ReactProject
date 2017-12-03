@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Text, View, TextInput, StyleSheet} from 'react-native';
 import GPSComponent from '../components/GPSComponent'
 
-export default class MyFirstComponent extends Component {
+export default class NoteComponent extends Component {
 
 	constructor() {
 		super();
@@ -26,7 +26,7 @@ export default class MyFirstComponent extends Component {
 				<TextInput 
 					style={{height: 40, width: 200, padding: 10, fontSize: 20}}
 		       		onChangeText={(title) => this.setState({title})}
-		       		autoFocus= {true}
+		       		autoFocus= {false}
 		        	value={this.state.title}
 		        	placeholder = {"Title"}
 		        	returnKeyType = {"next"}

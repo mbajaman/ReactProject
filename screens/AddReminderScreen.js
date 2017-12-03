@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
       padding:0
     },
     bottomView: {
-      height: '30%',
+      height: '30%'
     },
 });
