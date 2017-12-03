@@ -20,20 +20,24 @@ export default class AddScreenComponent extends Component {
                 <View style={styles.header}>
                     <Header
                       statusBarProps={{ barStyle: 'light-content' }}
-                      leftComponent={<Button 
-                        buttonStyle={styles.button} 
-                        fontWeight='bold' 
-                        backgroundColor='#3D6DCC' 
-                        title='CANCEL' 
-                        onPress = {() => navigate('Home')}
-                      />}
+                      leftComponent={
+                        <Button 
+                          buttonStyle={styles.button} 
+                          fontWeight='bold' 
+                          backgroundColor='#3D6DCC' 
+                          title='CANCEL' 
+                          onPress = {() => navigate('Home')}
+                        />
+                      }
                       centerComponent={{ text: 'NEW REMINDER', style: { fontSize: 15, color: '#fff' } }}
-                      rightComponent={<Button 
-                        buttonStyle={styles.button} 
-                        fontWeight='bold' 
-                        backgroundColor='#3D6DCC' 
-                        title='SAVE' 
-                      />}
+                      rightComponent={
+                        <Button 
+                          buttonStyle={styles.button} 
+                          fontWeight='bold' 
+                          backgroundColor='#3D6DCC' 
+                          title='SAVE' 
+                        />
+                      }
                       outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
                     />
                 </View>
