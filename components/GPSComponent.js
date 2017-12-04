@@ -27,7 +27,6 @@ export default class GPSComponent extends Component {
 				  		longitudeDelta: position.coords.accuracy/5000
 					},
 				});
-				this._mergeFunction();
 			});	
 	}
 	
