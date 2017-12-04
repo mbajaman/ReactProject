@@ -41,7 +41,7 @@ export default class HomeScreenComponent extends Component {
     render() {
         const {navigate} = this.props.navigation;
         let reminderData = this.state.reminders.map(function(p,index){
-        	if(p.photosArray.length>0){
+        	if(Object.keys(p).length > 3){
 	        	return (
 	        		<View key={index} >
 	        			<TouchableHighlight onPress={() => navigate('Add',{status: 1})}>
@@ -56,11 +56,13 @@ export default class HomeScreenComponent extends Component {
         	} else {
         		return (
 	        		<View key={index} >
-	        			<View style={{backgroundColor:'#000', height: 280, width: 170, borderRadius: 40, opacity:0.7}}/>
-	        			<View style={styles.reminderBanner}>
-	        				<Text style={styles.reminderTileText}>{p.title}</Text>
-	        				<Text style={styles.reminderTileText}>{p.date}</Text>
-	        			</View>
+	        			<TouchableHighlight onPress={() => navigate('Add',{status: 1})}>
+		        			<View style={{backgroundColor:'#000', height: 280, width: 170, borderRadius: 40, opacity:0.7}}/>
+		        		</TouchableHighlight>
+		        			<View style={styles.reminderBanner}>
+		        				<Text style={styles.reminderTileText}>{p.title}</Text>
+		        				<Text style={styles.reminderTileText}>{p.date}</Text>
+		        			</View>
 	        		</View>
 	        	)
         	}
