@@ -30,11 +30,6 @@ export default class GPSComponent extends Component {
 				this._mergeFunction();
 			});	
 	}
-
-	_mergeFunction() { //merge into storage
-		AsyncStorage.mergeItem(this.props.gpsKey, JSON.stringify(this.state.region));
-		console.log("Merged!");
-	}
 	
     render() {
         return (
