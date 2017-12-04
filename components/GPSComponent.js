@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View } from 'react-native';
+import { Text, View, AsyncStorage } from 'react-native';
 import MapView from 'react-native-maps';
 
 export default class GPSComponent extends Component {
@@ -18,16 +18,22 @@ export default class GPSComponent extends Component {
 	}
 	
 	componentDidMount () {
-		navigator.geolocation.getCurrentPosition((position) => { //current position
-			this.setState({
-				region: {
-					latitude: position.coords.latitude,
-					longitude: position.coords.longitude,
-					latitudeDelta: position.coords.accuracy/5000,
-			  		longitudeDelta: position.coords.accuracy/5000
-				},
-			});
-		});
+			navigator.geolocation.getCurrentPosition((position) => { //current position
+				this.setState({
+					region: {
+						latitude: position.coords.latitude,
+						longitude: position.coords.longitude,
+						latitudeDelta: position.coords.accuracy/5000,
+				  		longitudeDelta: position.coords.accuracy/5000
+					},
+				});
+				this._mergeFunction();
+			});	
+	}
+
+	_mergeFunction() { //merge into storage
+		AsyncStorage.mergeItem(this.props.gpsKey, JSON.stringify(this.state.region));
+		console.log("Merged!");
 	}
 	
     render() {
@@ -38,8 +44,13 @@ export default class GPSComponent extends Component {
 				showsUserLocation={true}
 				provider={'google'}
 				showsMyLocationButton={true}
-				loadingEnabled={true}
-			>
+				loadingEnabled={true}>
+
+				<MapView.Marker
+				  coordinate={this.state.region}
+				  image={{uri: 'http://www.myiconfinder.com/uploads/iconsets/256-256-a5485b563efc4511e0cd8bd04ad0fe9e.png'}}
+				/>
+
 			</MapView>
     	)
 	}
