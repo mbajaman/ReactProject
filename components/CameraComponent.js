@@ -17,14 +17,15 @@ export default class CameraComponent extends Component {
 	}
 
 	componentDidMount() {
-		this.displayData();
+		if(this.props.status!=0){
+			this.displayData();	
+		}
 	}
 
 	displayData = async () => {
 		try{
 			let user = await AsyncStorage.getItem('user');
 			let parsed = JSON.parse(user);
-			console.log(parsed);
 			if(parsed.photosArray){
 				this.setState({
 					photos: {

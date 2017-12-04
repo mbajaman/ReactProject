@@ -22,7 +22,9 @@ export default class NoteComponent extends Component {
 		this.setState({
 			curDate : new Date().toLocaleString()
 		});
-		this.displayData();
+		if(this.props.status!=0){
+			this.displayData();
+		}
 	}
 
 	displayData = async () => {
@@ -98,7 +100,7 @@ export default class NoteComponent extends Component {
 			        	/>
 		        </View>
 		        <View style= {styles.bottomView}>
-                  <CameraComponent />
+                  <CameraComponent status={this.props.status}/>
                 </View>
         	</View>
 
