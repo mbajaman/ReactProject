@@ -17,15 +17,11 @@ export default class AddScreenComponent extends Component {
   static navigationOptions = {
         header: null,
     };
-
-    componentDidMount() {
-      console.log(this.props.navigation.state.params.status);
-    }
     
   render() {
     return (
       <View>
-        <NoteComponent status={this.props.navigation.state.params.status} navigation={this.props.navigation}/>
+        <NoteComponent mykey={this.props.navigation.state.params.key} status={this.props.navigation.state.params.status} navigation={this.props.navigation}/>
       </View>
     );
   }

@@ -12,10 +12,15 @@ export default class NoteComponent extends Component {
 		super(props);
 		this.state = {
 			curDate: null,
-			userTitle: '',
-			userNotes: '',
+			userTitle: this.props.title,
+			userNotes: this.props.notes,
 		}
 		this.displayData = this.displayData.bind(this);
+	}
+
+	static defaultProps = { //default properties are good to have. Good code!
+		title: 'New Title',
+		notes: 'New note'
 	}
 
 	componentDidMount() {
@@ -29,7 +34,7 @@ export default class NoteComponent extends Component {
 
 	displayData = async () => {
 		try{
-			let user = await AsyncStorage.getItem('user');
+			let user = await AsyncStorage.getItem(this.props.mykey);
 			let parsed = JSON.parse(user);
 			this.setState({
 				curDate: parsed.date,
@@ -37,7 +42,7 @@ export default class NoteComponent extends Component {
 				userNotes: parsed.notes,
 			});
 		} catch(error) {
-			alert(error);
+			console.log("No photos: "+ error)
 		}
 	}
 	saveData() {
@@ -46,7 +51,7 @@ export default class NoteComponent extends Component {
 			date: this.state.curDate,
 			notes: this.state.userNotes,
 		}
-		AsyncStorage.setItem('user', JSON.stringify(obj));
+		AsyncStorage.setItem(obj.date, JSON.stringify(obj));
 	}
 
 	render(){
@@ -100,7 +105,7 @@ export default class NoteComponent extends Component {
 			        	/>
 		        </View>
 		        <View style= {styles.bottomView}>
-                  <CameraComponent status={this.props.status}/>
+                  <CameraComponent cameraKey={this.props.mykey} status={this.props.status}/>
                 </View>
         	</View>
 

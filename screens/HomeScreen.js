@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, StatusBar, Image, TouchableHighlight, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, TouchableHighlight, ScrollView, AsyncStorage } from 'react-native';
 import { Header } from 'react-native-elements';
 import { Icon } from 'react-native-vector-icons';
 
@@ -34,17 +34,18 @@ export default class HomeScreenComponent extends Component {
 				})
 			})
 		} catch(error) {
-			alert(error);
+			console.log("No photos: "+ error)
 		}
 	}
     
     render() {
         const {navigate} = this.props.navigation;
         let reminderData = this.state.reminders.map(function(p,index){
-        	if(Object.keys(p).length > 3){
+        	console.log(Object.keys(p).length);
+        	if(Object.keys(p).length == 4){
 	        	return (
-	        		<View key={index} >
-	        			<TouchableHighlight onPress={() => navigate('Add',{status: 1})}>
+	        		<View style={{margin: 5}} key={index} >
+	        			<TouchableHighlight onPress={() => navigate('Add',{status: 1, key: p.date } )}>
 	        				<Image style={styles.reminderTile} source={{uri: p.photosArray[0].uri}} />
 	        			</TouchableHighlight>
 	        			<View style={styles.reminderBanner}>
@@ -53,10 +54,10 @@ export default class HomeScreenComponent extends Component {
 	        			</View>
 	        		</View>
 	        	)
-        	} else {
+        	} else if(Object.keys(p).length == 3) {
         		return (
-	        		<View key={index} >
-	        			<TouchableHighlight onPress={() => navigate('Add',{status: 1})}>
+	        		<View style={{margin: 5}} key={index} >
+	        			<TouchableHighlight onPress={() => navigate('Add',{status: 1, key: p.date })}>
 		        			<View style={{backgroundColor:'#808080', height: 280, width: 170, borderRadius: 40}}/>
 		        		</TouchableHighlight>
 		        			<View style={styles.reminderBanner}>
@@ -74,17 +75,16 @@ export default class HomeScreenComponent extends Component {
                       statusBarProps={{ barStyle: 'light-content' }}
                       leftComponent={{ icon: 'menu', color: '#fff' }}
                       centerComponent={{ text: 'MY REMINDERS', style: { fontSize: 15, color: '#fff' } }}
-                      rightComponent={{ icon: 'home', color: '#fff' }}
                       outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
                     />
                 </View>
-                <View style={styles.notesContainer}>
-                	{reminderData}
-                    <TouchableHighlight onPress={() => navigate('Add', {status: 0})}>
-                        <Image style={styles.placeholder} source={require('../assets/note-placeholder.png')} />
-                    </TouchableHighlight>
+	                <ScrollView contentContainerStyle={styles.scrollContainer}>
+	                	{reminderData}
+	                    <TouchableHighlight onPress={() => navigate('Add', {status: 0, key: 'default'})}>
+	                        <Image style={styles.placeholder} source={require('../assets/note-placeholder.png')} />
+	                    </TouchableHighlight>
+	                </ScrollView>
                 </View>
-            </View>
         );
     }
 }
@@ -101,18 +101,17 @@ const styles = StyleSheet.create({
 		height: 280,
 		width: 170,
 		resizeMode: 'contain',
+		margin: 5
 	},
-	notesContainer: {
+	scrollContainer: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		backgroundColor: '#fff',
-		padding: 10,
 	},
 	reminderTile: {
 		height: 280,
 		width: 170,	
 		borderRadius: 40,
-		opacity:0.7
+		opacity:0.7,
 	},
 	reminderBanner: {
 		backgroundColor: '#000',

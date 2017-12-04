@@ -10,7 +10,7 @@ export default class CameraComponent extends Component {
 		super(props);
 		this.state = {
 			photos: {
-				photosArray: []
+				photosArray: [],
 			}
 		};
 		this.displayData = this.displayData.bind(this);
@@ -24,7 +24,7 @@ export default class CameraComponent extends Component {
 
 	displayData = async () => {
 		try{
-			let user = await AsyncStorage.getItem('user');
+			let user = await AsyncStorage.getItem(this.props.cameraKey);
 			let parsed = JSON.parse(user);
 			if(parsed.photosArray){
 				this.setState({
@@ -34,8 +34,12 @@ export default class CameraComponent extends Component {
 				});
 			}
 		} catch(error) {
-			alert(error);
+			console.log("No photos: "+ error)
 		}
+	}
+
+	_mergeFunction() {
+		AsyncStorage.mergeItem(this.props.cameraKey, JSON.stringify(this.state.photos));
 	}
 
 	//Gallery image picker to choose image from local files.
@@ -50,7 +54,7 @@ export default class CameraComponent extends Component {
 			this.setState({
 				photos: this.state.photos //updates state.photo with new image.
 			});
-			AsyncStorage.mergeItem('user', JSON.stringify(this.state.photos));
+			this._mergeFunction();
 		}
 	};
 
@@ -68,7 +72,7 @@ export default class CameraComponent extends Component {
 			this.setState({
 				photos: this.state.photos //updates state.photo with new image.
 			});
-			AsyncStorage.mergeItem('user', JSON.stringify(this.state.photos));
+			this._mergeFunction();
 		}
 	};
 
