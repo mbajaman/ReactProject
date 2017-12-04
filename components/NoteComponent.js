@@ -47,12 +47,14 @@ export default class NoteComponent extends Component {
 		}
 	}
 	saveData() {
+		const {navigate} = this.props.navigation;
 		let obj = {
 			title: this.state.userTitle,
 			date: this.state.curDate,
 			notes: this.state.userNotes,
 		}
 		AsyncStorage.setItem(obj.date, JSON.stringify(obj)); //Setting key value info for Reminder
+		navigate('Home');
 	}
 
 	render(){
