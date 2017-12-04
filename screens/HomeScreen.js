@@ -57,7 +57,7 @@ export default class HomeScreenComponent extends Component {
         		return (
 	        		<View key={index} >
 	        			<TouchableHighlight onPress={() => navigate('Add',{status: 1})}>
-		        			<View style={{backgroundColor:'#000', height: 280, width: 170, borderRadius: 40, opacity:0.7}}/>
+		        			<View style={{backgroundColor:'#808080', height: 280, width: 170, borderRadius: 40}}/>
 		        		</TouchableHighlight>
 		        			<View style={styles.reminderBanner}>
 		        				<Text style={styles.reminderTileText}>{p.title}</Text>
