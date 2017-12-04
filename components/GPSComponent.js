@@ -13,18 +13,12 @@ export default class GPSComponent extends Component {
 			  latitudeDelta: 0,
 			  longitude: -123.1173224,
 			  longitudeDelta: 0,
-		  },
-		  location : {
-		  	latitude: 49.30,
-		  	latitudeDelta: 0,
-		  	longitude: -123.117,
-		  	longitudeDelta: 0,
 		  }
     	};
 	}
 	
 	componentDidMount () {
-		navigator.geolocation.getCurrentPosition((position) => {
+		navigator.geolocation.getCurrentPosition((position) => { //current position
 			this.setState({
 				region: {
 					latitude: position.coords.latitude,
@@ -38,7 +32,7 @@ export default class GPSComponent extends Component {
 	
     render() {
         return (
-			<MapView
+			<MapView //Location viewer and also saves reminder location
 				region={this.state.region}
 	        	style={{height: 200}}
 				showsUserLocation={true}

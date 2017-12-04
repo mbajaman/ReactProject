@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Text, View, TextInput, StyleSheet, AsyncStorage } from 'react-native';
 import { Header, Button } from 'react-native-elements';
 
+//External Components
 import GPSComponent from '../components/GPSComponent'
 import CameraComponent from '../components/CameraComponent'
 
@@ -11,9 +12,9 @@ export default class NoteComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			curDate: null,
-			userTitle: this.props.title,
-			userNotes: this.props.notes,
+			curDate: null, //Current Date and Time, also used as key for storing Reminders in AsyncStorage
+			userTitle: this.props.title, //Reminder title
+			userNotes: this.props.notes, //Remindder notes
 		}
 		this.displayData = this.displayData.bind(this);
 	}
@@ -23,7 +24,7 @@ export default class NoteComponent extends Component {
 		notes: 'New note'
 	}
 
-	componentDidMount() {
+	componentDidMount() { //Set date / key and display info if it already exists!
 		this.setState({
 			curDate : new Date().toLocaleString()
 		});
@@ -34,7 +35,7 @@ export default class NoteComponent extends Component {
 
 	displayData = async () => {
 		try{
-			let user = await AsyncStorage.getItem(this.props.mykey);
+			let user = await AsyncStorage.getItem(this.props.mykey); //Passing prop/key to fetch Reminder info
 			let parsed = JSON.parse(user);
 			this.setState({
 				curDate: parsed.date,
@@ -51,11 +52,11 @@ export default class NoteComponent extends Component {
 			date: this.state.curDate,
 			notes: this.state.userNotes,
 		}
-		AsyncStorage.setItem(obj.date, JSON.stringify(obj));
+		AsyncStorage.setItem(obj.date, JSON.stringify(obj)); //Setting key value info for Reminder
 	}
 
 	render(){
-		const {navigate} = this.props.navigation;
+		const {navigate} = this.props.navigation; //navigation prop 
 		return(
 			<View style={styles.container}>
 			<View style={styles.header}>
@@ -77,13 +78,13 @@ export default class NoteComponent extends Component {
                           fontWeight='bold' 
                           backgroundColor='#3D6DCC' 
                           title='SAVE' 
-                          onPress = {this.saveData.bind(this)}
+                          onPress = {this.saveData.bind(this)} //save text and date info!
                         />
                       }
                       outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
                     />
                 </View>
-				<TextInput 
+				<TextInput  //Title
 					style={{height: 40, width: 200, padding: 10, fontSize: 20}}
                     onChangeText={(userTitle) => this.setState({userTitle})}
 		       		autoFocus= {false}
@@ -94,7 +95,7 @@ export default class NoteComponent extends Component {
 	        	<Text style={{fontSize: 20, marginBottom: 10}}> Date: {this.state.curDate} </Text>
 	        	<GPSComponent />
 	        	<View style={styles.textContainer}>
-		        	<TextInput 
+		        	<TextInput  //Notes
 						style={{width: 350, padding: 10, marginTop: 10}}
 						multiline={true}
 						autoGrow={true}
@@ -105,13 +106,15 @@ export default class NoteComponent extends Component {
 			        	/>
 		        </View>
 		        <View style= {styles.bottomView}>
-                  <CameraComponent cameraKey={this.props.mykey} status={this.props.status}/>
+                  <CameraComponent cameraKey={this.props.mykey} status={this.props.status} /* Camera Key to set custom images for each reminder */ />
                 </View>
         	</View>
 
 		);
 	}
 }
+
+//StyleSheet
 const styles = StyleSheet.create({
 	textContainer: {
 		height: 100

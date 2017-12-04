@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, StatusBar, Image, TouchableHighlight, ScrollVie
 import { Header } from 'react-native-elements';
 import { Icon } from 'react-native-vector-icons';
 
+//Main screen component
 export default class HomeScreenComponent extends Component {
 
     constructor(props) {
@@ -10,26 +11,26 @@ export default class HomeScreenComponent extends Component {
         this.state = {
         	reminders: []
         };
-        this.displayData = this.displayData.bind(this);
+        this.displayData = this.displayData.bind(this); //Bind for setting state
     }
 
-    static navigationOptions = {
+    static navigationOptions = { //removes StackNavigator header
         header: null,
     };
 
     componentDidMount() {
-		this.displayData();
+		this.displayData(); //Display reminders
 	}
 
     displayData = async () => {
 		try{
-			await AsyncStorage.getAllKeys().then(async (value) => {
+			await AsyncStorage.getAllKeys().then(async (value) => {  //fetch all Reminder 'keys'
 				let reminders = value.map(async (val, key) => {
-					let objectData = await AsyncStorage.getItem(val);
+					let objectData = await AsyncStorage.getItem(val); //fetch all Reminder 'values'
 					let parsedObjectData = JSON.parse(objectData);
 					this.state.reminders.push(parsedObjectData);
 					this.setState({
-						reminders: this.state.reminders
+						reminders: this.state.reminders //Set reminder values
 					})
 				})
 			})
@@ -38,11 +39,11 @@ export default class HomeScreenComponent extends Component {
 		}
 	}
     
+    //Render Function
     render() {
         const {navigate} = this.props.navigation;
-        let reminderData = this.state.reminders.map(function(p,index){
-        	console.log(Object.keys(p).length);
-        	if(Object.keys(p).length == 4){
+        let reminderData = this.state.reminders.map(function(p,index){ //Assigning Reminder data
+        	if(Object.keys(p).length == 4){ //Elements if photos Array exists in Reminder
 	        	return (
 	        		<View style={{margin: 5}} key={index} >
 	        			<TouchableHighlight onPress={() => navigate('Add',{status: 1, key: p.date } )}>
@@ -54,7 +55,7 @@ export default class HomeScreenComponent extends Component {
 	        			</View>
 	        		</View>
 	        	)
-        	} else if(Object.keys(p).length == 3) {
+        	} else if(Object.keys(p).length == 3) { //Elements if no photos Array exists
         		return (
 	        		<View style={{margin: 5}} key={index} >
 	        			<TouchableHighlight onPress={() => navigate('Add',{status: 1, key: p.date })}>
@@ -71,9 +72,9 @@ export default class HomeScreenComponent extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Header
+                    <Header //Header for homeScreen
                       statusBarProps={{ barStyle: 'light-content' }}
-                      leftComponent={{ icon: 'menu', color: '#fff' }}
+                      leftComponent={{ icon: 'menu', color: '#fff' }} //Menu for future features.
                       centerComponent={{ text: 'MY REMINDERS', style: { fontSize: 15, color: '#fff' } }}
                       outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
                     />
@@ -89,6 +90,7 @@ export default class HomeScreenComponent extends Component {
     }
 }
 
+//Styling
 const styles = StyleSheet.create({
 	container: {
 		height: '100%',

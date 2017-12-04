@@ -10,14 +10,14 @@ export default class CameraComponent extends Component {
 		super(props);
 		this.state = {
 			photos: {
-				photosArray: [],
+				photosArray: [], //stores Photos
 			}
 		};
 		this.displayData = this.displayData.bind(this);
 	}
 
 	componentDidMount() {
-		if(this.props.status!=0){
+		if(this.props.status!=0){ //new Reminder check
 			this.displayData();	
 		}
 	}
@@ -38,7 +38,7 @@ export default class CameraComponent extends Component {
 		}
 	}
 
-	_mergeFunction() {
+	_mergeFunction() { //merge into storage
 		AsyncStorage.mergeItem(this.props.cameraKey, JSON.stringify(this.state.photos));
 	}
 
@@ -119,6 +119,8 @@ export default class CameraComponent extends Component {
 		);
 	}
 }
+
+//StyleSheet
 const styles = StyleSheet.create({
 	container: {
 		height: '100%',
