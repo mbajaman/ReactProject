@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, StatusBar, Image, TouchableHighlight, ScrollView, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity, ScrollView, AsyncStorage } from 'react-native';
 import { Header } from 'react-native-elements';
 import { Icon } from 'react-native-vector-icons';
 
@@ -46,9 +46,9 @@ export default class HomeScreenComponent extends Component {
         	if(Object.keys(p).length == 4){ //Elements if photos Array exists in Reminder
 	        	return (
 	        		<View style={{margin: 5}} key={index} >
-	        			<TouchableHighlight onPress={() => navigate('Add',{status: 1, key: p.date } )}>
+	        			<TouchableOpacity onPress={() => navigate('Add',{status: 1, key: p.date } )}>
 	        				<Image style={styles.reminderTile} source={{uri: p.photosArray[0].uri}} />
-	        			</TouchableHighlight>
+	        			</TouchableOpacity>
 	        			<View style={styles.reminderBanner}>
 	        				<Text style={styles.reminderTileText}>{p.title}</Text>
 	        				<Text style={styles.reminderTileText}>{p.date}</Text>
@@ -58,9 +58,9 @@ export default class HomeScreenComponent extends Component {
         	} else if(Object.keys(p).length == 3) { //Elements if no photos Array exists
         		return (
 	        		<View style={{margin: 5}} key={index} >
-	        			<TouchableHighlight onPress={() => navigate('Add',{status: 1, key: p.date })}>
+	        			<TouchableOpacity onPress={() => navigate('Add',{status: 1, key: p.date })}>
 		        			<View style={{backgroundColor:'#808080', height: 280, width: 170, borderRadius: 40}}/>
-		        		</TouchableHighlight>
+		        		</TouchableOpacity>
 		        			<View style={styles.reminderBanner}>
 		        				<Text style={styles.reminderTileText}>{p.title}</Text>
 		        				<Text style={styles.reminderTileText}>{p.date}</Text>
@@ -81,9 +81,9 @@ export default class HomeScreenComponent extends Component {
                 </View>
 	                <ScrollView contentContainerStyle={styles.scrollContainer}>
 	                	{reminderData}
-	                    <TouchableHighlight onPress={() => navigate('Add', {status: 0, key: 'default'})}>
+	                    <TouchableOpacity onPress={() => navigate('Add', {status: 0, key: 'default'})}>
 	                        <Image style={styles.placeholder} source={require('../assets/note-placeholder.png')} />
-	                    </TouchableHighlight>
+	                    </TouchableOpacity>
 	                </ScrollView>
                 </View>
         );

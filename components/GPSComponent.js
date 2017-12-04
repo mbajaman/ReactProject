@@ -18,16 +18,16 @@ export default class GPSComponent extends Component {
 	}
 	
 	componentDidMount () {
-			navigator.geolocation.getCurrentPosition((position) => { //current position
-				this.setState({
-					region: {
-						latitude: position.coords.latitude,
-						longitude: position.coords.longitude,
-						latitudeDelta: position.coords.accuracy/5000,
-				  		longitudeDelta: position.coords.accuracy/5000
-					},
-				});
-			});	
+		navigator.geolocation.getCurrentPosition((position) => { //current position
+			this.setState({
+				region: {
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude,
+					latitudeDelta: position.coords.accuracy/5000,
+			  		longitudeDelta: position.coords.accuracy/5000
+				},
+			});
+		});	
 	}
 	
     render() {
