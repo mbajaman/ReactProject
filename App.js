@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 
 import HomeScreen from "./screens/HomeScreen"
 import AddReminderScreen from "./screens/AddReminderScreen"
+import NoteComponent from './components/NoteComponent'
 
 export const ReminderApp = StackNavigator({
 	Home: {
@@ -11,6 +12,9 @@ export const ReminderApp = StackNavigator({
 	},
 	Add: {
 		screen: AddReminderScreen
+	},
+	Note: {
+		screen: NoteComponent
 	}
 });
 

@@ -5,8 +5,8 @@ import { Icon } from 'react-native-vector-icons';
 
 export default class HomeScreenComponent extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
 
         }

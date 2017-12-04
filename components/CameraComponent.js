@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Text, View, StyleSheet, TouchableOpacity, Dimensions, Image, ScrollView } from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Dimensions, Image, ScrollView, AsyncStorage } from 'react-native';
 import { ImagePicker } from 'expo';
 import { SocialIcon } from 'react-native-elements';
 
@@ -9,8 +9,32 @@ export default class CameraComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			photos: []
+			photos: {
+				photosArray: []
+			}
 		};
+		this.displayData = this.displayData.bind(this);
+	}
+
+	componentDidMount() {
+		this.displayData();
+	}
+
+	displayData = async () => {
+		try{
+			let user = await AsyncStorage.getItem('user');
+			let parsed = JSON.parse(user);
+			console.log(parsed);
+			if(parsed.photosArray){
+				this.setState({
+					photos: {
+						photosArray : parsed.photosArray
+					}
+				});
+			}
+		} catch(error) {
+			alert(error);
+		}
 	}
 
 	//Gallery image picker to choose image from local files.
@@ -21,10 +45,11 @@ export default class CameraComponent extends Component {
 		});
 
 		if(!result.cancelled) {
-			this.state.photos.push(result); // adds image to array 'photo'.
+			this.state.photos.photosArray.push(result); // adds image to array 'photo'.
 			this.setState({
 				photos: this.state.photos //updates state.photo with new image.
 			});
+			AsyncStorage.mergeItem('user', JSON.stringify(this.state.photos));
 		}
 	};
 
@@ -38,10 +63,11 @@ export default class CameraComponent extends Component {
 		});
 
 		if(!result.cancelled) {
-			this.state.photos.push(result); // adds image to array 'photo'.
+			this.state.photos.photosArray.push(result); // adds image to array 'photo'.
 			this.setState({
 				photos: this.state.photos //updates state.photo with new image.
 			});
+			AsyncStorage.mergeItem('user', JSON.stringify(this.state.photos));
 		}
 	};
 
@@ -54,7 +80,7 @@ export default class CameraComponent extends Component {
 					<ScrollView
 						contentContainerStyle = {styles.scrollView} >
 
-						{this.state.photos.map(function(p, index) {
+						{this.state.photos.photosArray.map(function(p, index) {
 							return(
 								<TouchableOpacity key={index}>
 									<Image 
@@ -73,7 +99,7 @@ export default class CameraComponent extends Component {
 						<SocialIcon 
 		  					button type='instagram'					
 		  					title='IMPORT' 
-		  					onPress={ this._pickImage }
+		  					onPress={ this._pickImage}
 						/>
 					</View>
 					<View style={styles.buttons}>
@@ -91,7 +117,7 @@ export default class CameraComponent extends Component {
 const styles = StyleSheet.create({
 	container: {
 		height: '100%',
-		padding: 5,
+		padding: 5
 	},
 	bottomContainer: {
 		position: 'absolute',
@@ -105,8 +131,8 @@ const styles = StyleSheet.create({
 		flex: 1
 	},	
 	image: {
-		height: (Dimensions.get('window').height/4) - 12,
-		width: (Dimensions.get('window').width/2) - 2,
+		height: (Dimensions.get('window').height/3) - 17,
+		width: (Dimensions.get('window').width/2) - 7,
 		margin: 1,
 	},
 	scrollView: {

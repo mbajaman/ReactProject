@@ -1,46 +1,88 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Text, View, TextInput, StyleSheet, AsyncStorage } from 'react-native';
+import { Header, Button } from 'react-native-elements';
+
 import GPSComponent from '../components/GPSComponent'
+import CameraComponent from '../components/CameraComponent'
 
 export default class NoteComponent extends Component {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			curDate: null,
-			text: 'Enter'
+			userTitle: '',
+			userNotes: '',
 		}
+		this.displayData = this.displayData.bind(this);
 	}
 
 	componentDidMount() {
-        AsyncStorage.getItem("myKey").then((value) => {
-            this.setState({"myKey": value});
-        }).done();
-
-        AsyncStorage.getItem("myKey2").then((value) => {
-            this.setState({"myKey2": value});
-        }).done();
-
 		this.setState({
 			curDate : new Date().toLocaleString()
 		});
+		this.displayData();
 	}
 
-    getInitialState() {
-        return { };
-    }
+	displayData = async () => {
+		try{
+			let user = await AsyncStorage.getItem('user');
+			let parsed = JSON.parse(user);
+			this.setState({
+				curDate: parsed.date,
+				userTitle: parsed.title,
+				userNotes: parsed.notes,
+			});
+		} catch(error) {
+			alert(error);
+		}
+	}
+	saveData() {
+		let obj = {
+			title: this.state.userTitle,
+			date: this.state.curDate,
+			notes: this.state.userNotes,
+		}
+		AsyncStorage.setItem('user', JSON.stringify(obj));
+	}
 
 	render(){
+		const {navigate} = this.props.navigation;
 		return(
-			<View style={styles.conatiner}>
+			<View style={styles.container}>
+			<View style={styles.header}>
+                    <Header
+                      statusBarProps={{ barStyle: 'light-content' }}
+                      leftComponent={
+                        <Button 
+                          buttonStyle={styles.button} 
+                          fontWeight='bold' 
+                          backgroundColor='#3D6DCC' 
+                          title='CANCEL' 
+                          onPress = {() => navigate('Home')}
+                        />
+                      }
+                      centerComponent={{ text: 'NEW REMINDER', style: { fontSize: 15, color: '#fff' } }}
+                      rightComponent={
+                        <Button 
+                          buttonStyle={styles.button} 
+                          fontWeight='bold' 
+                          backgroundColor='#3D6DCC' 
+                          title='SAVE' 
+                          onPress = {this.saveData.bind(this)}
+                        />
+                      }
+                      outerContainerStyles={{ backgroundColor: '#3D6DCC' }}
+                    />
+                </View>
 				<TextInput 
 					style={{height: 40, width: 200, padding: 10, fontSize: 20}}
-                    onChangeText={(userTitle) => this.saveTitle(userTitle)}
+                    onChangeText={(userTitle) => this.setState({userTitle})}
 		       		autoFocus= {false}
 		        	placeholder = {"Title"}
 		        	returnKeyType = {"next"}
-		        	defaultValue={this.state.myKey}
+		        	defaultValue={this.state.userTitle}
 	        	/>
 	        	<Text style={{fontSize: 20, marginBottom: 10}}> Date: {this.state.curDate} </Text>
 	        	<GPSComponent />
@@ -50,31 +92,36 @@ export default class NoteComponent extends Component {
 						multiline={true}
 						autoGrow={true}
 		        		maxHeight={100}
-                    	onChangeText={(userNote) => this.saveNote(userNote)}
+                    	onChangeText={(userNotes) => this.setState({userNotes})}
 			        	placeholder = {"Reminder Notes"}
-			        	defaultValue={this.state.myKey2}
+			        	defaultValue={this.state.userNotes}
 			        	/>
 		        </View>
+		        <View style= {styles.bottomView}>
+                  <CameraComponent />
+                </View>
         	</View>
 
 		);
 	}
-
-	saveTitle(value) {
-        AsyncStorage.setItem("myKey", value);
-        this.setState({"myKey": value});
-    }
-
-    saveNote(value) {
-        AsyncStorage.setItem("myKey2", value);
-        this.setState({"myKey2": value});
-    }
 }
 const styles = StyleSheet.create({
-	container: {
-		padding: 20
-	},
 	textContainer: {
 		height: 100
-	}
+	},
+	header: {
+      width: '100%',
+    },
+    placeholder: {
+      height: 280,
+      width: 170,
+      resizeMode: 'contain',
+    },
+    button: {
+      margin: 0,
+      padding:0
+    },
+    bottomView: {
+      height: '30%'
+    },
 });

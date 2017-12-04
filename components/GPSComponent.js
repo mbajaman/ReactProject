@@ -14,21 +14,17 @@ export default class GPSComponent extends Component {
 			  longitude: -123.1173224,
 			  longitudeDelta: 0,
 		  },
+		  location : {
+		  	latitude: 49.30,
+		  	latitudeDelta: 0,
+		  	longitude: -123.117,
+		  	longitudeDelta: 0,
+		  }
     	};
-		this.onRegionChange = this.onRegionChange.bind(this);
-	}
-
-	onRegionChange(region) {
-		console.log(region);
-		this.setState({
-			region
-		});
 	}
 	
 	componentDidMount () {
 		navigator.geolocation.getCurrentPosition((position) => {
-			console.log('Before setting the state: ' + this.state.region.latitude + ', ' + this.state.region.longitude);
-			console.log('Current location: ' + position.coords.latitude + ', ' + position.coords.longitude);
 			this.setState({
 				region: {
 					latitude: position.coords.latitude,
@@ -37,7 +33,6 @@ export default class GPSComponent extends Component {
 			  		longitudeDelta: position.coords.accuracy/5000
 				},
 			});
-			console.log('After setting the state: ' + this.state.region.latitude + ', ' + this.state.region.longitude);
 		});
 	}
 	
@@ -45,14 +40,12 @@ export default class GPSComponent extends Component {
         return (
 			<MapView
 				region={this.state.region}
-				onRegionChange={this.onRegionChange}
 	        	style={{height: 200}}
 				showsUserLocation={true}
 				provider={'google'}
 				showsMyLocationButton={true}
 				loadingEnabled={true}
 			>
-         	
 			</MapView>
     	)
 	}
